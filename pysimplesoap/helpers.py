@@ -346,7 +346,10 @@ def preprocess_schema(schema, imported_schemas, elements, xsd_uri, dialect, http
 
         element_type = element.get_local_name()
         if element_type in ('element', 'complexType', "simpleType"):
-            namespace = local_namespaces[None]          # get targetNamespace
+            try:
+                namespace = local_namespaces[None]          # get targetNamespace
+            except:
+                continue
             element_ns = global_namespaces[ns]          # get the prefix
             element_name = element['name']
             log.debug("Parsing Element %s: %s" % (element_type, element_name))
